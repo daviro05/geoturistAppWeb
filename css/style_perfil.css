@@ -1,0 +1,95 @@
+html,body {
+    margin:0;
+    padding:0;
+    background-image: url("../img/fondo2.jpg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    /*background-position: center;*/
+    background-color: black;
+    color:white;
+}
+
+#logo{
+    border: 2px solid;
+    border-radius: 20px;
+    width: 500px;
+    margin: auto;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.logotipo{
+    width: 70%;
+}
+
+div#content {
+	color: #333;
+	text-align: center;
+    
+}
+
+#header{
+    width: 700px;
+    margin: auto;
+    margin-top: 30px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.cuadro{
+	width: 40px;
+    height: 40px;
+    display: inline-block;
+    margin: 10px;
+}
+
+.icon{
+	width: 100%;
+}
+
+#menu_inicio{
+	border: 2px solid white;
+    width: 400px;
+    margin: auto;
+    border-radius: 20px;
+}
+
+/*Alta de grupos*/
+
+#cuadro_alta
+{
+
+    border: 2px solid white;
+    width: 500px;
+    margin: auto;
+    margin-top: 30px;
+    border-radius: 20px;
+    background-color: black;
+}
+
+.alta_g, .centrado{
+    text-align: center;
+    margin: auto;
+}
+
+.cuadro_alta{
+    width: 150px;
+}
+
+.f_alta{
+    margin-top: 20px;
+}
+
+.contenido_p{
+    width: 500px;
+    margin: auto;
+    border: 2px solid white;
+    border-radius: 20px;
+    margin-top: 30px;
+    background-color: black;
+}
+
+input,select{
+    padding: 9px 8px 7px;
+    text-align: center;
+}

@@ -1,0 +1,101 @@
+html,body {
+	margin:0;
+	padding:0;
+	background-image: url("../img/fondo2.jpg");
+	background-size: 100%;
+	background-repeat: no-repeat;
+	/*background-position: center;*/
+    background-color: black;
+	color:white;
+}
+
+#logo{
+	border: 2px solid;
+	border-radius: 20px;
+    width: 500px;
+    margin: auto;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.logotipo{
+	width: 70%;
+}
+
+#header{
+    width: 700px;
+    margin: auto;
+    margin-top: 30px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.registro
+{
+	border:1px solid black; 
+	border-radius:20px;
+	padding:10px;
+	position:relative;
+	margin:0 auto;
+	width:600px;
+	background:#3a4652 url("../imagenes/metal.jpg") repeat;
+}
+
+.botones
+{
+	text-align: center;
+}
+
+.b_reg{
+	margin: 10px;
+    width: 100px;
+    border-radius: 20px;
+}
+
+
+.campo
+{
+	text-align: right;
+	text-shadow: 3px 3px 2px black; 
+}
+
+.cambiar
+{
+	background-color: black;
+	color: white;
+	padding: 5px;
+	border: 1px solid white;
+	border-radius:20px;
+	margin: 10px;
+}
+.cambiar:hover
+{
+	background-color: white;
+	color: #16193B;
+	padding: 5px;
+	border: 1px solid white;
+	border-radius:20px;
+	margin: 10px;
+	border-color: rgba(82, 168, 236, 0.8);
+    outline: 0px none;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(82, 168, 236, 0.6);
+}
+
+a:hover{text-decoration:none;}
+
+
+a{
+	text-decoration:none;
+	color:#B7D9F7;
+}
+
+input,select
+{
+	padding: 9px 8px 7px;
+}
+input[type="file"]
+{
+	padding: 9px 8px 7px;
+	width: 156px;
+}
+
