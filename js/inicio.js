@@ -1,23 +1,9 @@
 $(document).ready(function(){
 
 $("#ampliar").click(function(){
-  /*$("#content").hide(500).animate("slow");
-    $("#sidebar").animate({width: '1160px', opacity: '1'}, "slow");
-    $("#mapa").css('display', 'inline');
-    $('#ampliar').css('display', 'none');
-    $('#reducir').css('display', 'inline');
-    $('#add-lugar').attr('id','add-lugar-expand');*/
      window.location='inicio.php?id=add_monumento';
 
  });
- /*$("#reducir").click(function(){
-     $("#sidebar").animate({width: '300px', opacity: '1'}, "slow");
-     $("#content").show(1000).animate("slow");
-     $("#mapa").css('display', 'none');
-     $('#ampliar').css('display', 'inline');
-     $('#reducir').css('display', 'none');
-     $('#add-lugar-expand').attr('id','add-lugar');
-  });*/
 
 function confirmar(){
   if(confirm("Estás seguro?"))
@@ -30,7 +16,7 @@ function confirmar(){
 
 $(".lugares_sel").change(function () {
   var total = $(".lugares_sel:checked").length;
-  $(".info").html(total+" lugares serán eliminados");
+  $(".info").html(total+" se eliminarán");
  });
 
 
@@ -44,7 +30,35 @@ $(".checkbox_all").change(function () {
     }
 
     var total = $(".lugares_sel:checked").length;
-  $(".info").html(total+" lugares serán eliminados");
+  $(".info").html(total+" se eliminarán");
 });
+
+// Funcines para marcar todos los dias de la semana o desmarcarlos
+
+  $("#t_dias").change(function () {
+    if ($(this).is(':checked')) {
+        $(".d_semana").prop('checked', true);
+    } else {
+        $(".d_semana").prop('checked', false);
+    }
+
+  });
+
+  $(".d_semana").change(function () {
+    if (!$(this).is(':checked')) {
+        $("#t_dias").prop('checked', false);
+    }
+
+    let num = 0;
+    $(".d_semana").each(function() {
+      if($(this).is(":checked")){
+        num++;
+      }
+      if(num>=7)
+        $("#t_dias").prop('checked', true);
+      else
+        $("#t_dias").prop('checked', false);
+    });
+  });
 
 });

@@ -19,7 +19,7 @@
 							<div class="cabecera">Monumentos</div>
 							<div class="cuadro_info">
 								<table class="ver_info">
-									<?php info_lugares($conexion);?>
+								<div id="up_lugares"></div>									
 								</table>
 							</div>
 						</div>
@@ -46,7 +46,7 @@
 							<div class="cabecera">Usuarios</div>
 							<div class="cuadro_info">
 								<table class="ver_info">
-									<?php info_usuarios($conexion);?>
+								<div id="up_usuarios"></div>	
 								</table>
 							</div>
 						</div>

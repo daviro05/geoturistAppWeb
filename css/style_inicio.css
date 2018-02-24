@@ -400,7 +400,7 @@ textarea{
     padding: 4px;
 }
 
-.d_semana {
+.d_semana, .marcar_semana {
 	height: auto !important;
 }
 

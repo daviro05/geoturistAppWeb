@@ -11,9 +11,10 @@ if(isset($_SESSION['usuario'])){
 <title>GeoTuristApp</title>
 <link rel="shortcut icon" href="./img/favicon.ico" />
 <link href="./css/style_inicio.css" rel="stylesheet" type="text/css" />
-<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">-->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="./js/jquery.min.js"></script>
 <script src="./js/inicio.js"></script>
+<script src="./js/actualizar_datos.js"></script>
 
 </head>
 <body>

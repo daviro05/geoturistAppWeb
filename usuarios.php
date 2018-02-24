@@ -26,7 +26,7 @@
 								<th>Sexo</th>
 								<th>C</th>
 								<th>V</th>
-								<th>Opciones</th>
+								<th>Opt</th>
 							</tr>
 					<form action="inicio.php?id=usuarios" method="post">
 							<?php obtener_usuarios($conexion); ?>

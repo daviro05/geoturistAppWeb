@@ -1,5 +1,6 @@
 <div id="add_monumento">
 <script src="./js/imagenes.js"></script>
+<script src="./js/inicio.js"></script>
 			<!-- Content -->
 			<div class="content-principal">
 				<!-- Box -->
@@ -50,7 +51,7 @@
 										</div>
 										<div class="dias">
 											<p>Días de apertura</p>
-											<input class="d_semana" type="radio" name="todos_dias" value="Todos"/> Todos 
+											<input id="t_dias" class="marcar_semana" type="checkbox" name="todos_dias" value="Todos"/> Todos 
 											<input class="d_semana" type="checkbox" name="dias_semana[]" value="L"/> L
 											<input class="d_semana" type="checkbox" name="dias_semana[]" value="M"/> M
 											<input class="d_semana" type="checkbox" name="dias_semana[]" value="X"/> X

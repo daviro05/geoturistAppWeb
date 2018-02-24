@@ -1,17 +1,12 @@
 <?php
 #######################################
-### FUNCIONES DE CONEXI�N A BBDD ######
+### FUNCIONES DE CONEXIÓN A BBDD ######
 #######################################
 
-function conecta()
-{
-	$conexion= mysqli_connect("localhost","root","","geoturistapp");
-
-	return $conexion;
-}
+include('./config_conexion.php');
 
 #######################################
-###### FUNCIONES DE VALIDACI�N ########
+###### FUNCIONES DE VALIDACIÓN ########
 #######################################
 
 function validar_clave($pass)
@@ -342,20 +337,7 @@ function eliminar_lugar($id_lugar,$conexion){
 	$eliminar = mysqli_query($conexion,"DELETE FROM lugares WHERE id_lugar='$id_lugar'");
 }
 
-function info_lugares($conexion){
-	$ver_lugares = mysqli_query($conexion,"SELECT * FROM lugares");
 
-	if($ver_lugares){
-		while($fila = mysqli_fetch_array($ver_lugares))
-		{
-			echo "<tr>
-					<td>$fila[id_lugar]</td>
-					<td><a href='inicio.php?id=ver_monumento&id_lugar=$fila[id_lugar]
-					&nombre_lugar=$fila[nombre]&lat=$fila[latitud]&lon=$fila[longitud]'>$fila[nombre]</a></td>
-				</tr>";
-		}
-	}
-}
 
 function info_comentarios($conexion){
 	$ver_comen = mysqli_query($conexion,"SELECT * FROM comentarios");
@@ -532,27 +514,17 @@ function obtener_usuarios($conexion){
 	}
 }
 
+## Funcion para llamar cada cierto tiempo a las funciones de la info de datos ##
 
-function info_usuarios($conexion){
-	$ver_usuarios = mysqli_query($conexion,"SELECT * FROM usuarios");
+function actualizar_info($funcion,$tiempo,$conexion){
 
-	if($ver_usuarios){
-		while($fila = mysqli_fetch_array($ver_usuarios))
-		{
-			echo "<tr>
-					<td>$fila[id_usuario]</td>
-					<td><a href='inicio.php?id=ver_usuario&id_usuario=$fila[id_usuario]'>$fila[nombre]</a></td>
-				</tr>";
-		}
-	}
+
 }
 
 
 
-
-
 #######################################
-###### FUNCIONES DE B�SQUEDA ##########
+###### FUNCIONES DE BÚSQUEDA ##########
 #######################################
 
 
