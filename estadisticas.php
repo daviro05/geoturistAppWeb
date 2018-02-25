@@ -22,7 +22,7 @@
 								<th>Opciones</th>
 							</tr>
 					<form action="inicio.php?id=estadisticas" method="post">
-							
+							<?php ?>
 
 						</table>
 					</div>

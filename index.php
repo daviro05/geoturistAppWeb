@@ -7,7 +7,7 @@ include "funciones_BD.php";
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>GeoTuristApp</title>
-<link rel="shortcut icon" href="./favicon.ico" />
+<link rel="shortcut icon" href="./img/favicon.ico" />
 <link href="./css/style_index.css" rel="stylesheet" type="text/css" />
 <script src="./js/script.js"></script>
 </head>

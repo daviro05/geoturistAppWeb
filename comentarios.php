@@ -48,11 +48,22 @@
 			<div id="sidebar">
 				
 				<!-- Box -->
-				<div class="box">
+				<div class="add-coment-box">
 					
 					<!-- Box Head -->
 					<div class="box-head">
 						<h2>Añadir nuevo comentario</h2>
+
+						<form id="add-lugar" action="inicio.php?id=comentarios" method="post">
+							<div id="info_lugar">
+									<label for="u_coment">Usuario que comenta</label>
+									<select id="u_coment"><?php usuarios_lista($conexion); ?></select>
+									<label for="l_coment">Lugar a comentar</label>
+									<select id="l_coment"><?php lugares_lista($conexion); ?></select>
+									<textarea id="coment" name="coment" placeholder="Comentario"></textarea>
+									<input class="add-lugar-button" type="submit" name="AddUsuario" value="Añadir Comentario"/>
+							</div>
+						</form>
 					</div>
 					<!-- End Box Head-->
 					

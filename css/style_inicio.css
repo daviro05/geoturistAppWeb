@@ -483,6 +483,26 @@ td .lat, td .long{
 
 
 
+
+/* Estilo pagina comentarios.php */
+
+.add-coment-box{
+	background:white; padding:1px; margin-bottom:20px;
+	height: 330px;
+	-webkit-border-radius: 5px;
+	text-align: center;
+}
+
+#u_coment, #l_coment{
+	height: 35px;
+	margin-top: 10px;
+
+}
+
+
+
+
+
 /* Estilo pagina usuarios.php */
 .sexo{
 	border:1px solid grey;

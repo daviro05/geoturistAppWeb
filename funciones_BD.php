@@ -518,6 +518,40 @@ function obtener_usuarios($conexion){
 }
 
 #######################################
+###### FUNCIONES PARA COMENTARIOS #####
+#######################################
+
+function usuarios_lista($conexion){
+
+	$usuarios = mysqli_query($conexion,"SELECT * FROM usuarios");
+
+	echo "<option value='admin'>Admin</option>";
+
+	if($usuarios){
+		while($fila = mysqli_fetch_array($usuarios))
+		{
+			echo "<option value='$fila[id_usuario]'>$fila[id_usuario]</option>";
+		}
+	}
+}
+
+function lugares_lista($conexion){
+
+	$lugares = mysqli_query($conexion,"SELECT * FROM lugares");
+
+	if($lugares){
+		while($fila = mysqli_fetch_array($lugares))
+		{
+			echo "<option value='$fila[id_lugar]'>$fila[nombre]</option>";
+		}
+	}
+}
+
+
+
+
+
+#######################################
 ###### FUNCIONES DE BÚSQUEDA ##########
 #######################################
 
