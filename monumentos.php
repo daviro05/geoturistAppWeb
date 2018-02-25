@@ -14,27 +14,26 @@
 					<!-- End Box Head -->
 					<!-- Table -->
 					<div class="table monu">
-						<table width="100%" border="0" cellspacing="0" cellpadding="0">
+						<table id="form_lugares" width="100%" border="0" cellspacing="0" cellpadding="0">
 							<tr>
 								<th width="13"><input type="checkbox" class="checkbox_all" /></th>
 								<th>Nombre</th>
 								<th>Tipo</th>
-								<th>Latitud</th>
 								<th>Longitud</th>
+								<th>Latitud</th>
 								<th>Visitas</th>
 								<th>Opciones</th>
 							</tr>
-					<form action="#" method="post" onsubmit="return confirmar()">
+						<form  action="#" method="post" onsubmit="return confirmar()">
 							<?php obtener_lugares($conexion); ?>
-
 						</table>
 					</div>
-					<!-- Opciones de eliminacion -->
-					<div class="op_eliminar">
-						<button type="submit" class="papelera" name="Del_Sel">Eliminar seleccionados</button>
-						<span class="info"></span>
-					</div>
-					</form>
+						<!-- Opciones de eliminacion -->
+						<div class="op_eliminar">
+							<button type="submit" class="papelera" name="Del_Sel">Eliminar seleccionados</button>
+							<span class="info"></span>
+						</div>
+						</form>
 					<!-- Table -->
 				</div>
 				<!-- End Box -->
@@ -61,6 +60,7 @@
 						<div class="map_mini" id="map"></div>
 						<ul id="geoData">
 						</ul>
+						<script src="./js/actualizar_lugares.js"></script>
 						<script src="./js/mapa.js"></script>
 						<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3U19_OGKxbR56XZ6p3Eett6lfZUg1ILs&libraries=places&callback=initMap" async defer></script>
 

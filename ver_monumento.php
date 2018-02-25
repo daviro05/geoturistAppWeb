@@ -118,6 +118,7 @@
 
 		<?php
 			if(isset($_GET['eliminar'])){
-	    		eliminar_archivos($_GET['id_lugar'],$_GET['tipo_archivo'],$_GET['url'],$conexion);
+				eliminar_archivos($_GET['id_lugar'],$_GET['tipo_archivo'],$_GET['url'],$conexion);
+				header("Location:inicio.php");
 			}
 		?>

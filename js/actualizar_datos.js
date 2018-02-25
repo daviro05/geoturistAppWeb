@@ -16,25 +16,25 @@ $(document).ready(function() {
 	   }
 	});
 	
-}
+    }
 
-function actualizar_usuarios(){
-    var tipo="usuarios";
-  
-  $.ajax({
-      type: 'POST',
-      url: "actualizar.php?tipo="+tipo,
-      beforeSend: function () {
-        $("#up_usuarios").html("Procesando, espere por favor...");
-        },
-      success: function(respuesta) {
+    function actualizar_usuarios(){
+        var tipo="usuarios";
+    
+    $.ajax({
+        type: 'POST',
+        url: "actualizar.php?tipo="+tipo,
+        beforeSend: function () {
+            $("#up_usuarios").html("Procesando, espere por favor...");
+            },
+        success: function(respuesta) {
 
-          $('#up_usuarios').html(respuesta);
-     }
-  });
-  
-}
+            $('#up_usuarios').html(respuesta);
+        }
+    });
+    
+    }
 
-setInterval(actualizar_lugares,8000)//Actualizamos cada 2 segundos
-setInterval(actualizar_usuarios,8000)//Actualizamos cada 2 segundos
+    setInterval(actualizar_lugares,8000)//Actualizamos cada 2 segundos
+    setInterval(actualizar_usuarios,8000)//Actualizamos cada 2 segundos
 });

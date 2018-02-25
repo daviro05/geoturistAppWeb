@@ -1,3 +1,5 @@
+/* Estilo para las distintas páginas de la aplicación */
+
 * { padding:0; margin:0; outline:0; }
 body {
 	background:cadetblue;
@@ -78,17 +80,14 @@ h3 a{ text-decoration: none; }
 .small-nav a{ color:#000; }
 
 
-#main {}
 #content { float:left; width:850px; }
 #sidebar { float:right; width:300px; }
 
 
-.table {  }
 .table th{ background:#EAEFFF url(../img/th.gif) repeat-x 0 0; color:#818181; text-align: left; padding:7px 10px; border-bottom:solid 1px #d2d1cb;}
 .table td{ background:#fbfcfc;  border-bottom:solid 1px #e0e0e0; padding:8px 10px; }
 .table tr.odd td{ background:#f8f8f8; }
 .table tr:hover td{ background:#EAEFFF; }
-.table a.ico{ }
 
 .box { background:#fbfcfc; height: 100%;  margin-bottom:20px; }
 .box-head { background:#000; height:32px; color:#fff; padding: 0 10px; line-height:32px; white-space:nowrap; border-bottom:solid 1px #fff; }
@@ -172,7 +171,7 @@ textarea.size1 { height:180px; }
 	margin-bottom: 10px;
 }
 
-/* Estilo para principal.php */
+/****** Estilo para principal.php *****/
 
 .content-principal{
 	margin:0 auto;
@@ -222,7 +221,7 @@ textarea.size1 { height:180px; }
 }
 
 
-/* Estilo para monumentos.php */
+/***** Estilo para monumentos.php *****/
 
 #add-lugar{
 	color:black;
@@ -292,8 +291,19 @@ textarea{
 	margin-left: 200px;
 }
 
+#form_lugares td{
+	width: 180px;
+	text-overflow: ellipsis; /* puntos suspensivos */ 
+	white-space: nowrap; /* no permite multilinea */ 
+	overflow: hidden; /* ocultar el resto */
+}
 
-/* Mapa */
+td .lat, td .long{
+	width: 20px;
+}
+
+
+/****** Mapa ******/
 
 #mapa{
 	color:black;
@@ -319,7 +329,7 @@ textarea{
 	height: 200px;
 	margin-top: 10px;
 }
-}
+
 .controls {
 	margin-top: 10px;
 	border: 1px solid transparent;
@@ -360,7 +370,7 @@ textarea{
  	border-color: #4d90fe;
 }
 
-/* Estilo add_monumento */
+/******** Estilo add_monumento **********/
 
 .zona_izq{
 

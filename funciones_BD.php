@@ -139,6 +139,8 @@ function alta_lugar($nombre,$tipo,$latitud,$longitud,$desc,$conexion)
 	*/
 	$alta = mysqli_query($conexion,"INSERT INTO lugares (nombre,tipo,latitud,longitud,descripcion)
 		VALUES('$nombre','$tipo','$latitud','$longitud','$desc')");
+
+	echo "<script>window.location = './inicio.php?id=monumentos'</script>";
 }
 
 function alta_lugar_completo($nombre,$tipo,$latitud,$longitud,$hora_abre,$hora_cierra,$dias_abre,$desc,$visitas,$conexion)
@@ -168,6 +170,8 @@ function alta_lugar_completo($nombre,$tipo,$latitud,$longitud,$hora_abre,$hora_c
 	}
 	else
 		echo "<p>Error</p>";
+
+	echo "<script>window.location = './inicio.php?id=monumentos'</script>";
 
 }
 
@@ -278,7 +282,7 @@ $doc_tmp=$_FILES['file_doc']['tmp_name'];
 for ($i=0; $i<$cantidad; $i++){
  	//echo $nombre_doc[$i];
 
-	//Si existe doc y tiene un tama�o correcto
+	//Si existe doc y tiene un tamaño correcto
 	if (($nombre_doc == !NULL))
 	{
 	   //indicamos los formatos que permitimos subir a nuestro servidor
@@ -289,7 +293,7 @@ for ($i=0; $i<$cantidad; $i++){
 	   || ($tipo[$i] == 'application/mspowerpoint')
 	   || ($tipo[$i] == 'text/html'))
 	   {
-	      // Ruta donde se guardar�n los audios que subamos
+	      // Ruta donde se guardaran los audios que subamos
 	      $directorio = './multimedia/doc_lugares/';
 	      // Muevo el doc desde el directorio temporal a nuestra ruta indicada anteriormente
 	      move_uploaded_file($doc_tmp[$i],$directorio.$nombre_doc[$i]);
@@ -304,13 +308,11 @@ for ($i=0; $i<$cantidad; $i++){
 	} 
 	else 
 	{
-	   //si existe la variable pero se pasa del tama�o permitido
+	   //si existe la variable pero se pasa del tamaño permitido
 	   if($nombre_doc == !NULL) echo "El doc es demasiado grande "; 
 	}
 }
 }
-
-
 
 function obtener_lugares($conexion){
 	$lugares = mysqli_query($conexion,"SELECT * FROM lugares");
@@ -322,8 +324,8 @@ function obtener_lugares($conexion){
 				<td><input type='checkbox' name='lug_sel[]' class='lugares_sel' value='$fila[id_lugar]'/></td>
 				<td>$fila[nombre]</td>
 				<td>$fila[tipo]</td>
-				<td>$fila[longitud]</td>
-				<td>$fila[latitud]</td>
+				<td class='long'>$fila[longitud]</td>
+				<td clas='lat'>$fila[latitud]</td>
 				<td>$fila[visitas]</td>
 				<td><a href='inicio.php?id=monumentos&eliminar=$fila[id_lugar]'	class='ico del'>Eliminar</a>
 				<a href='inicio.php?id=ver_monumento&id_lugar=$fila[id_lugar]
@@ -335,6 +337,7 @@ function obtener_lugares($conexion){
 
 function eliminar_lugar($id_lugar,$conexion){
 	$eliminar = mysqli_query($conexion,"DELETE FROM lugares WHERE id_lugar='$id_lugar'");
+	echo "<script>window.location = './inicio.php?id=monumentos'</script>";
 }
 
 
@@ -513,15 +516,6 @@ function obtener_usuarios($conexion){
 		}
 	}
 }
-
-## Funcion para llamar cada cierto tiempo a las funciones de la info de datos ##
-
-function actualizar_info($funcion,$tiempo,$conexion){
-
-
-}
-
-
 
 #######################################
 ###### FUNCIONES DE BÚSQUEDA ##########
