@@ -13,15 +13,13 @@ if($usuario != ""){
     $nombre=$_POST['nombre'];
     $apellidos=$_POST['apellidos'];
     $email=$_POST['email'];
-    //$fechaNacimiento=$_POST['f_nac'];
-    $sexo=$_POST['sexo'];
 
     $comentarios=0;
     $visitas=0;
+    $response["correcto"] = false;
 
-    $alta_usuario = mysqli_query($conexion,"INSERT INTO usuarios (id_usuario,nombre,apellidos,password,email,fechaNacimiento,sexo,comentarios,visitas,img_perfil)
-		VALUES('$usuario','$nombre','$apellidos','$clave','$email','1992',
-    '$sexo','$comentarios','$visitas','vacio.png')");
+    $alta_usuario = mysqli_query($conexion,"INSERT INTO usuarios (id_usuario,nombre,apellidos,password,email,comentarios,visitas,img_perfil)
+		VALUES('$usuario','$nombre','$apellidos','$clave','$email','$comentarios','$visitas','vacio.png')");
     
     if($alta_usuario){
         $response = array();
