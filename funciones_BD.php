@@ -439,18 +439,16 @@ function eliminar_seleccionados($conexion){
 #######################################
 
 
-function alta_usuario($id_usuario,$nombre,$apellidos,$password,$email,$fechaNacimiento,
-	$sexo,$comentarios,$visitas,$conexion)
+function alta_usuario($id_usuario,$nombre,$apellidos,$password,$email,$comentarios,$visitas,$conexion)
 {
-	$alta_usuario = mysqli_query($conexion,"INSERT INTO usuarios (id_usuario,nombre,apellidos,password,email,fechaNacimiento,sexo,comentarios,visitas,img_perfil)
-		VALUES('$id_usuario','$nombre','$apellidos','$password','$email','$fechaNacimiento',
-	'$sexo','$comentarios','$visitas','vacio.png')");
+	$alta_usuario = mysqli_query($conexion,"INSERT INTO usuarios (id_usuario,nombre,apellidos,password,email,comentarios,visitas,img_perfil)
+		VALUES('$id_usuario','$nombre','$apellidos','$password','$email','$comentarios','$visitas','vacio.png')");
 
-	if($alta_usuario){
+	/*if($alta_usuario){
 		if($_FILES['imaperfil']['size'] != 0){
 			subir_imagenes_perfil($id_usuario,$conexion);
 		}
-	}
+	}*/
 }
 
 function subir_imagenes_perfil($id_usuario,$conexion){
@@ -506,12 +504,9 @@ function obtener_usuarios($conexion){
 				<td>$fila[nombre]</td>
 				<td>$fila[apellidos]</td>
 				<td>$fila[email]</td>
-				<td>$fila[fechaNacimiento]</td>
-				<td>$fila[sexo]</td>
 				<td>$fila[comentarios]</td>
 				<td>$fila[visitas]</td>
 				<td><a href='inicio.php?id=usuarios&eliminar=$fila[id_usuario]' class='ico del'>Eliminar</a>
-				<a href='inicio.php?id=ver_usuario&id_usuario=$fila[id_usuario]' class='ico edit'>Editar</a></td>
 			</tr>";
 		}
 	}

@@ -548,6 +548,13 @@ td .lat, td .long{
 	width: 20px;
 }
 
+.add-box-users{
+	background:white; padding:1px; margin-bottom:20px;
+	height: 320px;
+	-webkit-border-radius: 5px;
+	text-align: center;
+}
+
 /* Estilo ara configuracion */
 
 .form_config{
