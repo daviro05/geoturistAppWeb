@@ -27,8 +27,6 @@ if(isset($_SESSION['usuario'])){
 		<div id="top-navigation">
 			Bienvenido <a href="#"><strong><?php echo $_SESSION['usuario']?></strong></a>
 			<span>|</span>
-			<a href="inicio.php?id=configuracion">Configuración</a>
-			<span>|</span>
 			<a href="cerrar.php">Salir</a>
 		</div>
 	</div>
