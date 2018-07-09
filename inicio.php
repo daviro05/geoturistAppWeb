@@ -40,12 +40,12 @@ if(isset($_SESSION['usuario'])){
 		    	<?php if(isset($_GET['id']) && $_GET['id'] == "monumentos") echo "class='active'";?>><span>Monumentos</span></a></li>
 		    <li><a href="inicio.php?id=comentarios"
 		    	<?php if(isset($_GET['id']) && $_GET['id'] == "comentarios") echo "class='active'";?>><span>Comentarios</span></a></li>
-		    <li><a href="inicio.php?id=estadisticas"
-		    	<?php if(isset($_GET['id']) && $_GET['id'] == "estadisticas") echo "class='active'";?>><span>Estadísticas</span></a></li>
+		    <li><a href="inicio.php?id=valoraciones"
+		    	<?php if(isset($_GET['id']) && $_GET['id'] == "valoraciones") echo "class='active'";?>><span>Valoraciones</span></a></li>
 		    <li><a href="inicio.php?id=usuarios"
 		    	<?php if(isset($_GET['id']) && $_GET['id'] == "usuarios") echo "class='active'";?>><span>Usuarios</span></a></li>
-		    <li><a href="inicio.php?id=about"
-		    	<?php if(isset($_GET['id']) && $_GET['id'] == "about") echo "class='active'";?>><span>Incidencias</span></a></li>
+		    <li><a href="inicio.php?id=incidencias"
+		    	<?php if(isset($_GET['id']) && $_GET['id'] == "incidencias") echo "class='active'";?>><span>Incidencias</span></a></li>
 		</ul>
 	</div>
 	<!-- End Main Nav -->
@@ -69,12 +69,12 @@ if(isset($_SESSION['usuario'])){
 					include 'monumentos.php';
 				if($_GET['id'] == 'comentarios')
 					include 'comentarios.php';
-				if($_GET['id'] == 'estadisticas')
-					include 'estadisticas.php';
+				if($_GET['id'] == 'valoraciones')
+					include 'valoraciones.php';
 				if($_GET['id'] == 'usuarios')
 					include 'usuarios.php';
-				if($_GET['id'] == 'about')
-					include 'about.php';
+				if($_GET['id'] == 'incidencias')
+					include 'incidencias.php';
 				if($_GET['id'] == 'add_monumento')
 						include 'add_monumento.php';
 				if($_GET['id'] == 'ver_monumento')

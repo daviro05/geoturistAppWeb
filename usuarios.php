@@ -6,10 +6,10 @@
 					<!-- Box Head -->
 					<div class="box-head">
 						<h2 class="left">Usuarios</h2>
-						<div class="right">
+<!-- 						<div class="right">
 							<input type="text" class="field small-field" />
 							<input type="submit" class="button" value="Buscar" />
-						</div>
+						</div> -->
 					</div>
 					<!-- End Box Head -->	
 					<!-- Table -->

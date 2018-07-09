@@ -5,30 +5,30 @@
 				<div class="box">
 					<!-- Box Head -->
 					<div class="box-head">
-						<h2 class="left">Estadísticas</h2>
-						<div class="right">
+						<h2 class="left">Incidencias</h2>
+<!-- 						<div class="right">
 							<input type="text" class="field small-field" />
 							<input type="submit" class="button" value="Buscar" />
-						</div>
+						</div> -->
 					</div>
 					<!-- End Box Head -->	
 					<!-- Table -->
-					<div class="table estadis">
+					<div class="table about">
 						<table width="100%" border="0" cellspacing="0" cellpadding="0">
 							<tr>
 								<th width="13"><input type="checkbox" class="checkbox_all" /></th>
-								<th>Lugar</th>
-								<th>Valoración</th>
+								<th>Usuario</th>
+								<th>Tipo</th>
+								<th>Incidencia</th>
 								<th>Opciones</th>
 							</tr>
-					<form action="inicio.php?id=estadisticas" method="post">
-							<?php ?>
+					<form action="inicio.php?id=about" method="post">
 
 						</table>
 					</div>
 					<!-- Opciones de eliminacion -->
 					<div class="op_eliminar">
-						<button type="submit" class="papelera" name="Del_Sel">Eliminar seleccionados</button>
+						<button type="submit" class="papelera" name="Del_Sel">Eliminar seleccionadas</button>
 						<span class="info"></span>
 					</div>
 					</form>
@@ -49,7 +49,7 @@
 					
 					<!-- Box Head -->
 					<div class="box-head">
-						<h2>Mantenimiento de estadísticas</h2>
+						<h2>Gestionar incidencias</h2>
 					</div>
 					<!-- End Box Head-->
 					
