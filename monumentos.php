@@ -24,7 +24,7 @@
 								<th>Visitas</th>
 								<th>Opciones</th>
 							</tr>
-						<form  action="#" method="post" onsubmit="return confirmar()">
+						<form  method="post" onsubmit="return confirmar('monumentos')">
 							<?php obtener_lugares($conexion); ?>
 						</table>
 					</div>
@@ -80,7 +80,6 @@
 					<!-- End Box Head-->
 
 					<div class="box-content">
-						<!--<a href="#" class="add-button"><span>Add new Article</span></a>-->
 
 						<!-- Menu para filtrar -->
 

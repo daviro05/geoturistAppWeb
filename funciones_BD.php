@@ -327,7 +327,7 @@ function obtener_lugares($conexion){
 				<td class='long'>$fila[longitud]</td>
 				<td clas='lat'>$fila[latitud]</td>
 				<td>$fila[visitas]</td>
-				<td><a href='inicio.php?id=monumentos&eliminar=$fila[id_lugar]'	class='ico del'>Eliminar</a>
+				<td><a href='inicio.php?id=monumentos&eliminar=$fila[id_lugar]'	class='ico del' onclick='return confirmar()'>Eliminar</a>
 				<a href='inicio.php?id=ver_monumento&id_lugar=$fila[id_lugar]
 				&nombre_lugar=$fila[nombre]&lat=$fila[latitud]&lon=$fila[longitud]' class='ico edit'>Editar</a></td>
 			</tr>";
@@ -498,7 +498,7 @@ function obtener_usuarios($conexion){
 		while($fila = mysqli_fetch_array($usuarios))
 		{
 			echo "<tr>
-				<td><input type='checkbox' name='lug_sel[]' class='lugares_sel' value='$fila[id_usuario]'/></td>
+				<td><input type='checkbox' name='usu_sel[]' class='lugares_sel' value='$fila[id_usuario]'/></td>
 				<td><img class='img_perfil' src='./multimedia/img_perfiles/$fila[img_perfil]'></td>
 				<td>$fila[id_usuario]</td>
 				<td>$fila[nombre]</td>
@@ -506,21 +506,35 @@ function obtener_usuarios($conexion){
 				<td>$fila[email]</td>
 				<td>$fila[comentarios]</td>
 				<td>$fila[visitas]</td>
-				<td><a href='inicio.php?id=usuarios&eliminar=$fila[id_usuario]' class='ico del'>Eliminar</a>
+				<td><a href='inicio.php?id=usuarios&eliminar=$fila[id_usuario]' class='ico del' onclick='return confirmar()'>Eliminar</a>
 			</tr>";
 		}
 	}
+}
+
+function eliminar_usuario($id_usuario,$conexion){
+	$eliminar = mysqli_query($conexion,"DELETE FROM usuarios WHERE id_usuario='$id_usuario'");
+	echo "<script>window.location = './inicio.php?id=usuarios'</script>";
 }
 
 #######################################
 ###### FUNCIONES PARA COMENTARIOS #####
 #######################################
 
+function alta_comentario($id_usuario,$id_lugar,$comentario,$conexion)
+{
+	$alta_comentario = mysqli_query($conexion,"INSERT INTO comentarios (id_usuario,id_lugar,comentario)
+		VALUES('$id_usuario','$id_lugar','$comentario')") or die(mysqli_error($conexion));
+
+	if($alta_comentario)
+		echo "<script>window.location = './inicio.php?id=comentarios'</script>";
+
+}
+
+
 function usuarios_lista($conexion){
 
 	$usuarios = mysqli_query($conexion,"SELECT * FROM usuarios");
-
-	echo "<option value='admin'>Admin</option>";
 
 	if($usuarios){
 		while($fila = mysqli_fetch_array($usuarios))
@@ -540,6 +554,29 @@ function lugares_lista($conexion){
 			echo "<option value='$fila[id_lugar]'>$fila[nombre]</option>";
 		}
 	}
+}
+
+function obtener_comentarios($conexion){
+	$comentarios = mysqli_query($conexion,"SELECT * FROM comentarios");
+
+	if($comentarios){
+		while($fila = mysqli_fetch_array($comentarios))
+		{
+			echo "<tr>
+				<td><input type='checkbox' name='coment_sel[]' class='lugares_sel' value='$fila[id_comentario]'/></td>
+				<td>$fila[id_comentario]</td>
+				<td>$fila[id_usuario]</td>
+				<td>$fila[id_lugar]</td>
+				<td>$fila[comentario]</td>
+				<td><a href='inicio.php?id=comentarios&eliminar=$fila[id_comentario]' class='ico del' onclick='return confirmar()'>Eliminar</a>
+			</tr>";
+		}
+	}
+}
+
+function eliminar_comentario($id_comentario,$conexion){
+	$eliminar = mysqli_query($conexion,"DELETE FROM comentarios WHERE id_comentario='$id_comentario'");
+	echo "<script>window.location = './inicio.php?id=comentarios'</script>";
 }
 
 

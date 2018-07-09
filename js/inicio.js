@@ -1,21 +1,19 @@
 $(document).ready(function(){
 
+$(".papelera").prop("disabled",true);
+
 $("#ampliar").click(function(){
      window.location='inicio.php?id=add_monumento';
 
  });
 
-function confirmar(){
-  if(confirm("Estás seguro?"))
-    window.location.href ="";
-  else {
-    return false;
-  }
-}
-
 
 $(".lugares_sel").change(function () {
   var total = $(".lugares_sel:checked").length;
+  if(total == 0)
+    $(".papelera").prop("disabled",true);
+  else
+    $(".papelera").prop("disabled",false);
   $(".info").html(total+" se eliminarán");
  });
 
@@ -62,3 +60,13 @@ $(".checkbox_all").change(function () {
   });
 
 });
+
+function confirmar(opcion){
+  if(opcion == null)
+    opcion = 'este elemento';
+  if(confirm("Desea eliminar "+opcion+"?"))
+   return true;
+  else {
+    return false;
+  }
+}

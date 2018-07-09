@@ -26,7 +26,7 @@
 								<th>V</th>
 								<th>Opciones</th>
 							</tr>
-					<form action="inicio.php?id=usuarios" method="post">
+					<form action="inicio.php?id=usuarios" method="post" onsubmit="return confirmar('usuarios')">
 							<?php obtener_usuarios($conexion); ?>
 						</table>
 					</div>
@@ -104,3 +104,21 @@
 		  }
 		  
 		}
+
+		if(isset($_POST['Del_Sel'])){
+			if(!empty($_POST['usu_sel'])){
+				$cont = 0;
+				foreach($_POST['usu_sel'] as $usuario_del){
+					$cont++;
+					eliminar_usuario($usuario_del,$conexion);
+				}
+			}
+
+		}
+
+
+		if(isset($_GET['eliminar'])){
+    		eliminar_usuario($_GET['eliminar'],$conexion);
+		}
+
+		?>
