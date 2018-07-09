@@ -581,324 +581,56 @@ function eliminar_comentario($id_comentario,$conexion){
 
 
 
-
-
 #######################################
-###### FUNCIONES DE BÚSQUEDA ##########
+###### FUNCIONES DE VALORACIONES ######
 #######################################
 
-
-function busqueda($valor){
-
-	$conexion=conecta();
-
-	echo "<div id='hijo'>";
-	$consulta = mysqli_query($conexion,"SELECT * FROM usuarios WHERE nick LIKE '%$b%'");
-	while($col = mysqli_fetch_array($consulta)){
-			// reunir los resultados
-		$resultados.= "<h2><a href='/$col[nick]'>$col[nick]</a></h2>\r\n";
-	}
-
-	if($resultados){
-
-		$time = number_format($time_end - $time_start,4,'.','');
-		echo $resultados;
-
-	}else{
-
-			//echo "<p>No existen resultados</p>";
-
-	}
-	echo "</div>";
-}
-
-
-function ver_cuenta($usuario)
+function alta_valoracion($id_usuario,$id_lugar,$valoracion,$conexion)
 {
-	$conexion=conecta();
+	$valoraciones = mysqli_query($conexion,"SELECT * FROM valoraciones WHERE id_lugar='$id_lugar'");
 
-	$consultar_cuenta = mysqli_query($conexion,"SELECT * FROM usuarios WHERE nick='$usuario'");
-
-	$tipo="";
-	$abandonar="";
-	$existe=false;
-	$usuario='';
-
-	if($consultar_cuenta)
+	if(mysqli_num_rows($valoraciones)==1)
 	{
-		while($fila = mysqli_fetch_array($consultar_cuenta))
-		{
-
-			echo "<table class='micuenta' align='center'>
-			<tr><td>Nick de usuario: $fila[nick]</td></tr>
-			<tr><td>Nombre: $fila[nombre]</td></tr>
-			<tr><td>Apellidos: $fila[apellidos]</td></tr>
-			<tr><td>E-Mail: $fila[email]</td></tr>
-			<tr><td>Edad: $fila[edad]</td></tr>
-			<tr><td>Sexo: $fila[sexo]</td></tr>
-			<tr><td>Musica Preferida: $fila[musica_preferida]</td></tr>
-			<tr><td></td></tr></table>";
-		}
+		echo 'Ya se ha valorado ese lugar';
 	}
-}
+	else{
+		
+		$alta_valoracion = mysqli_query($conexion,"INSERT INTO valoraciones (id_usuario,id_lugar,valoracion)
+			VALUES('$id_usuario','$id_lugar','$valoracion')") or die(mysqli_error($conexion));
 
-
-function meter_grupo($nombre_grupo,$usuario,$tipo_musica,$edad_min,$edad_max,$conexion)
-{
-	$comprobar_usuario = mysqli_query($conexion,"SELECT nick FROM usuarios WHERE musica_preferida='$tipo_musica' AND '$edad_min'<=edad AND
-		'$edad_max' >= edad ");
-
-	if($comprobar_usuario)
-	{
-		while($fila = mysqli_fetch_array($comprobar_usuario))
-		{
-			$insertar = mysqli_query($conexion,"INSERT INTO usuario_grupo VALUES('$fila[nick]','$nombre_grupo')");
-		}
+		if($alta_valoracion)
+			echo "<script>window.location = './inicio.php?id=valoraciones'</script>";
 	}
 
 }
 
-function asignar_grupo($usuario,$edad,$tipo_musica,$conexion){
-	$edades = mysqli_query($conexion,"SELECT nombre_grupo FROM grupos WHERE tipo_musica='$tipo_musica' AND edad_min<='$edad'
-		AND edad_max>='$edad'");
 
-	if($edades){
-		while($fila = mysqli_fetch_array($edades))
+function obtener_valoraciones($conexion){
+	$valoraciones = mysqli_query($conexion,"SELECT * FROM valoraciones");
+
+	if($valoraciones){
+		while($fila = mysqli_fetch_array($valoraciones))
 		{
-			$insertar = mysqli_query($conexion,"INSERT INTO usuario_grupo VALUES('$usuario','$fila[nombre_grupo]')");
+			echo "<tr>
+				<td><input type='checkbox' name='valor_sel[]' class='lugares_sel' value='$fila[id_valoracion]'/></td>
+				<td>$fila[id_usuario]</td>
+				<td>$fila[id_lugar]</td>
+				<td>$fila[valoracion]</td>
+				<td><a href='inicio.php?id=valoraciones&eliminar=$fila[id_valoracion]' class='ico del' onclick='return confirmar()'>Eliminar</a>
+			</tr>";
 		}
 	}
+}
 
-
+function eliminar_valoracion($id_comentario,$conexion){
+	$eliminar = mysqli_query($conexion,"DELETE FROM valoraciones WHERE id_valoracion='$id_valoracion'");
+	echo "<script>window.location = './inicio.php?id=valoraciones'</script>";
 }
 
 #######################################
 ####### FUNCIONES DE MENSAJES #########
 #######################################
 
-
-function enviar_mensaje($emisor,$destinatario,$mensaje,$asunto,$conexion)
-{
-	$id_mensaje = time();
-
-	$enviar_mensaje = mysqli_query($conexion,"INSERT INTO mensajes VALUES('$id_mensaje','$destinatario','$emisor','$asunto','$mensaje',now(),'-')");
-
-	if($enviar_mensaje)
-		echo "<p class='correcto'>Mensaje enviado!</p>";
-}
-
-function enviar_mensaje_grupo($emisor,$destinatario,$mensaje,$asunto,$conexion)
-{
-
-	$destinatarios = mysqli_query($conexion,"SELECT nick from usuario_grupo where nombre_grupo='$destinatario'");
-
-	if($destinatarios){
-		while($fila = mysqli_fetch_array($destinatarios))
-		{
-			$id_mensaje = $fila['nick'].time();
-			$enviar_mensaje = mysqli_query($conexion,"INSERT INTO mensajes VALUES('$id_mensaje','$fila[nick]','$emisor','$asunto','$mensaje',now(),'$destinatario')");
-		}
-		echo "<p class='correcto'>Mensaje enviado!</p>";
-	}
-
-}
-
-function individual_a_todos($emisor,$mensaje,$asunto,$conexion){
-	$consultar_destinatarios = mysqli_query($conexion,"SELECT nick from usuarios");
-
-	if($consultar_destinatarios)
-	{
-		while($fila = mysqli_fetch_array($consultar_destinatarios))
-		{
-			$id_mensaje = $fila['nick'].time();
-			$insertar = mysqli_query($conexion,"INSERT INTO mensajes
-				VALUES('$id_mensaje','$fila[nick]','$emisor','$asunto','$mensaje',now(),'-')");
-			if(!$insertar)
-				echo "".mysqli_error($conexion) ."<br>";
-		}
-		echo "<p class='correcto'>Mensaje enviado!</p>";
-	}
-
-}
-
-
-function grupo_a_todos($emisor,$mensaje,$asunto,$conexion){
-
-	$consultar_destinatarios = mysqli_query($conexion,"SELECT nombre_grupo from usuario_grupo where nick='$emisor'");
-
-	if($consultar_destinatarios)
-	{
-		while($grupo = mysqli_fetch_array($consultar_destinatarios))
-		{
-			$obtener_destinos = mysqli_query($conexion,"SELECT nick from usuario_grupo where nombre_grupo='$grupo[nombre_grupo]'");
-			while($grupo_usuario = mysqli_fetch_array($obtener_destinos)){
-				$id_mensaje = $grupo_usuario['nick'].$grupo['nombre_grupo'].time();
-				$insertar = mysqli_query($conexion,"INSERT INTO mensajes
-					VALUES('$id_mensaje','$grupo_usuario[nick]','$emisor','$asunto','$mensaje',now(),'$grupo[nombre_grupo]')");
-
-				if(!$insertar)
-					echo "".mysqli_error($conexion) ."<br>";
-			}
-		}
-		echo "<p class='correcto'>Mensaje enviado!</p>";
-	}
-}
-
-
-function generar_destinatarios($usuario,$conexion)
-{
-	//WHERE nick!='$usuario'
-	$consultar_destinatarios = mysqli_query($conexion,"SELECT nick from usuarios");
-
-	if($consultar_destinatarios)
-	{
-		echo "<option value='Todos'>Todos</option>";
-		while($destinatario = mysqli_fetch_array($consultar_destinatarios))
-		{
-			echo "<option value='$destinatario[nick]'>$destinatario[nick]</option>";
-		}
-	}
-	else
-	{
-		echo "<option>Error BBDD</option>";
-	}
-}
-
-function generar_grupos($usuario,$conexion)
-{
-	$consultar_destinatarios = mysqli_query($conexion,"SELECT nombre_grupo from usuario_grupo where nick='$usuario'");
-
-	if($consultar_destinatarios)
-	{
-		echo "<option value='Todos'>Todos</option>";
-		while($destinatario = mysqli_fetch_array($consultar_destinatarios))
-		{
-			echo "<option value='$destinatario[nombre_grupo]'>$destinatario[nombre_grupo]</option>";
-		}
-	}
-	else
-	{
-		echo "<option>Error BBDD</option>";
-	}
-}
-
-function ver_mensajes_recibidos($usuario,$conexion)
-{
-	$ver_mensajes_r = mysqli_query($conexion,"SELECT * FROM mensajes WHERE nick_usuario_re='$usuario' ORDER BY fecha_hora DESC");
-	$i=0;
-	if($ver_mensajes_r)
-	{
-		echo "<p class='recibidos'>MENSAJES RECIBIDOS</p>";
-
-		echo "<table class='mensajes'><tr><td><b>Origen</b></td><td><b>Grupo</b></td><td><b>Asunto</b></td><td><b>Acci&oacute;n</b></td><td><b>Eliminar</b></td></tr></table>";
-		echo "<div id='div2'><table class='cuadro_men'>";
-
-		while($mensaje_r = mysqli_fetch_array($ver_mensajes_r))
-		{
-			$mensacod = base64_encode($mensaje_r['id_mensaje']);
-			$i++;
-			echo "<tr>
-			<td>$mensaje_r[nick_usuario_em]</td><td>$mensaje_r[tipo]</td><td>$mensaje_r[asunto]</td>
-			<td><a class='mensa' href='mensajes.php?user=$_SESSION[usuario]&id=$mensacod&action=leer&metodo=entrada'>
-			<img class='ico_men' src='./img/mensaje.png'></a></td>
-			<td><a class='mensa' href='mensajes.php?user=$_SESSION[usuario]&id=$mensacod&action=eliminar&metodo=entrada'><img class='ico_men' src='./img/error.png'></a></td>
-			</tr>";
-		}
-		if($i==0)
-			echo "<b>No hay mensajes</b>";
-}
-	echo "</table></div>";
-}
-
-function ver_mensajes_enviados($usuario,$conexion)
-{
-	$ver_mensajes_e = mysqli_query($conexion,"SELECT * FROM mensajes WHERE nick_usuario_em='$usuario' ORDER BY fecha_hora DESC");
-	$j=0;
-
-	if($ver_mensajes_e)
-	{
-		echo "<p class='enviados'>MENSAJES ENVIADOS</p>";
-
-		echo "<table class='mensajes'><tr><td><b>Destino</b></td><td><b>Grupo</b></td><td><b>Asunto</b></td><td><b>Acci&oacute;n</b></td><td><b>Eliminar</b></td></tr></table>";
-		echo "<div id='div1'><table class='cuadro_men'>";
-
-		while($mensaje_e = mysqli_fetch_array($ver_mensajes_e))
-		{
-			$mensacod = base64_encode($mensaje_e['id_mensaje']);
-			$j++;
-
-			echo "<tr>
-			<td>$mensaje_e[nick_usuario_re]</td><td>$mensaje_e[tipo]</td><td>$mensaje_e[asunto]</td>
-			<td><a class='mensa' href='mensajes.php?user=$_SESSION[usuario]&id=$mensacod&action=leer&metodo=salida'>
-			<img class='ico_men' src='./img/mensaje.png'></a></td>
-			<td><a class='mensa' href='mensajes.php?user=$_SESSION[usuario]&id=$mensacod&action=eliminar&metodo=salida'>
-			<img class='ico_men' src='./img/error.png'></a></td>
-			</tr>";
-		}
-		if($j==0)
-			echo "<b>No hay mensajes</b>";
-	}
-	echo "</table></div>";
-}
-
-function leer_mensaje($usuario,$id_mensaje,$conexion)
-{
-	$leer_mensaje = mysqli_query($conexion,"SELECT * from mensajes where id_mensaje='$id_mensaje'");
-
-	if($leer_mensaje)
-	{
-		if($mensaje = mysqli_fetch_array($leer_mensaje))
-		{
-			echo "<table class='mensajes2' align='center'>
-			<textarea class='cuadro_lect' style='resize:none;font-weight:bold' rows='10' cols='50' readonly>--------------------------------------------------\nEnviado el: $mensaje[fecha_hora] \nDe: $mensaje[nick_usuario_em]\nPara: $mensaje[nick_usuario_re]\n--------------------------------------------------\n\n$mensaje[mensaje]</textarea>
-		</table>";
-	}
-}
-if(isset($_GET['metodo'])=='entrada')
-{
-	$bandeja = "Entrada";
-}
-else
-{
-	$bandeja = "Salida";
-}
-echo "<a class='cambiar' href='mensajes.php?metodo=$_GET[metodo]'>Volver a Bandeja de $bandeja</a>";
-
-}
-
-function eliminar_mensaje($usuario,$id_mensaje,$conexion)
-{
-	$elimina_mensaje = mysqli_query($conexion,"DELETE FROM mensajes WHERE id_mensaje='$id_mensaje'");
-
-	if($elimina_mensaje)
-	{
-		echo "<p class='correcto'>Se ha eliminado el mensaje.</p>";
-	}
-	else
-	{
-		echo "<p class='aviso'>Error al eliminar el mensaje.</p>";
-	}
-	if(isset($_GET['metodo'])=='entrada'){$bandeja = "Entrada";}else{$bandeja = "Salida";}
-	echo "<a class='cambiar' href='mensajes.php?metodo=$_GET[metodo]'>Volver a Bandeja de $bandeja</a>";
-}
-
-
-function generar_usuarios($usuario,$conexion)
-{
-	$consultar_usuarios = mysqli_query($conexion,"SELECT nick from usuarios");
-
-	if($consultar_usuarios)
-	{
-		while($usuario_encotrado = mysqli_fetch_array($consultar_usuarios))
-		{
-			echo "<input type='checkbox' name='usuario_sel[]' value='$usuario_encotrado[nick]'> $usuario_encotrado[nick]";
-		}
-	}
-	else
-	{
-		echo "Error BBDD";
-	}
-}
 
 #######################################
 ####### FUNCIONES DE ELIMINAR #########

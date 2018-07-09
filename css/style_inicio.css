@@ -478,9 +478,13 @@ td .lat, td .long{
 
 
 
-/* Estilo pagina estadisticas.php */
+/* Estilo pagina valoraciones.php */
 
+#u_valoracion, #l_valoracion{
+	height: 35px;
+	margin-top: 10px;
 
+}
 
 
 
