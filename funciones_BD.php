@@ -592,11 +592,15 @@ function alta_valoracion($id_usuario,$id_lugar,$valoracion,$conexion)
 	if(mysqli_num_rows($valoraciones)==1)
 	{
 		echo 'Ya se ha valorado ese lugar';
+		$modificar_val = mysqli_query($conexion,"UPDATE valoraciones SET num_valoraciones = num_valoraciones+1 , 
+		valoracion = (valoracion+'$valoracion')/(num_valoraciones)
+		 WHERE id_lugar = '$id_lugar'");
+		echo "<script>window.location = './inicio.php?id=valoraciones'</script>";
 	}
 	else{
 		
-		$alta_valoracion = mysqli_query($conexion,"INSERT INTO valoraciones (id_usuario,id_lugar,valoracion)
-			VALUES('$id_usuario','$id_lugar','$valoracion')") or die(mysqli_error($conexion));
+		$alta_valoracion = mysqli_query($conexion,"INSERT INTO valoraciones (id_usuario,id_lugar,valoracion, num_valoraciones)
+			VALUES('$id_usuario','$id_lugar','$valoracion',1)") or die(mysqli_error($conexion));
 
 		if($alta_valoracion)
 			echo "<script>window.location = './inicio.php?id=valoraciones'</script>";
@@ -616,6 +620,7 @@ function obtener_valoraciones($conexion){
 				<td>$fila[id_usuario]</td>
 				<td>$fila[id_lugar]</td>
 				<td>$fila[valoracion]</td>
+				<td>$fila[num_valoraciones]</td>
 				<td><a href='inicio.php?id=valoraciones&eliminar=$fila[id_valoracion]' class='ico del' onclick='return confirmar()'>Eliminar</a>
 			</tr>";
 		}

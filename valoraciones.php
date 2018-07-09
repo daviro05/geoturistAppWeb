@@ -20,6 +20,7 @@
 								<th>Usuario</th>
 								<th>Lugar</th>
 								<th>Valoración</th>
+								<th>Num.Val</th>
 								<th>Opciones</th>
 							</tr>
 					<form action="inicio.php?id=valoraciones" method="post" onsubmit="return confirmar('valoraciones')">
