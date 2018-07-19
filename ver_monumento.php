@@ -51,6 +51,11 @@
 										$tipo=$file['tipo'];
 										$lat=$file['latitud'];
 										$lon=$file['longitud'];
+										$h_abre=$file['hora_abre'];
+										$h_cierra=$file['hora_cierra'];
+										$dias_abre=$file['dias_abre'];
+										$descripcion=$file['descripcion'];
+										$visitas=$file['visitas'];
 									}
 								}
 
@@ -68,22 +73,15 @@
 										<input id="lon" type="text" name="long" placeholder="Longitud"
 										value="<?php echo $lon; ?>">
 										<div class="horas">
-											Apertura <input id="hora_ini" type="time" name="hora_ini"/>
-											<input id="hora_fin" type="time" name="hora_fin"/> Cierre
+											Horario
+											<br><br>
+											<?php echo $h_abre." - ".$h_cierra; ?>
 										</div>
 										<div class="dias">
-											<p>Días de apertura</p>
-											<input class="d_semana" type="radio" name="todos_dias"/> Todos 
-											<input class="d_semana" type="checkbox" name="dias_seman[]" value="Lunes"/> L
-											<input class="d_semana" type="checkbox" name="dias_seman[]" value="Martes"/> M
-											<input class="d_semana" type="checkbox" name="dias_seman[]" value="Miércoles"/> X
-											<input class="d_semana" type="checkbox" name="dias_seman[]" value="Jueves"/> J
-											<input class="d_semana" type="checkbox" name="dias_seman[]" value="Viernes"/> V
-											<input class="d_semana" type="checkbox" name="dias_seman[]" value="Sábado"/> S
-											<input class="d_semana" type="checkbox" name="dias_seman[]" value="Domingo"/> D
+											<p>Días de apertura</p><br>
+											<?php echo $dias_abre; ?>
 										</div>
-										<textarea id="desc" name="desc" placeholder="Descripción"></textarea>
-										<input class="add-lugar-button" type="submit" name="AddLugar" value="MODIFICAR"/>
+										<textarea disabled id="desc" name="desc" placeholder="Descripción" ><?php echo $descripcion; ?></textarea>
 								</div>
 							
 						</div>
@@ -99,7 +97,7 @@
 							</div>
 
 							<div class="otros">
-								<span>Otros</span>
+								<span>Este lugar ha sido visitado: <?php echo $visitas; ?> veces</span>
 							</div>
 							
 						</div>

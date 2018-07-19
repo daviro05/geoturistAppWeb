@@ -329,7 +329,9 @@ function obtener_lugares($conexion){
 				<td>$fila[visitas]</td>
 				<td><a href='inicio.php?id=monumentos&eliminar=$fila[id_lugar]'	class='ico del' onclick='return confirmar()'>Eliminar</a>
 				<a href='inicio.php?id=ver_monumento&id_lugar=$fila[id_lugar]
-				&nombre_lugar=$fila[nombre]&lat=$fila[latitud]&lon=$fila[longitud]' class='ico edit'>Editar</a></td>
+				&nombre_lugar=$fila[nombre]&lat=$fila[latitud]&lon=$fila[longitud]
+				&h_abre=$fila[hora_abre]&h_cierra=$fila[hora_cierra]&dias_abre=$fila[dias_abre]
+				&descripcion=$fila[descripcion]&visitas=$fila[visitas]' class='ico edit'>Ver</a></td>
 			</tr>";
 		}
 	}
