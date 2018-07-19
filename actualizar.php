@@ -45,35 +45,42 @@ else if($tipo=="usuarios"){
 	}
 }
 
-else if($tipo==""){
+else if($tipo=="comentarios"){
 
+	$ver_comentarios = mysqli_query($conexion,"SELECT * FROM comentarios");
+    $comentarios_obtenidos ="";
+
+	if($ver_comentarios){
+		while($fila = mysqli_fetch_array($ver_comentarios))
+		{
+			$comentarios_obtenidos.= "<tr>
+					<td>$fila[id_comentario]</td>
+					<td>$fila[id_lugar]</td>
+					<td><a href='inicio.php?id=comentarios'>$fila[comentario]</a></td>
+				</tr>";
+        }
+        echo $comentarios_obtenidos;
+	}
+}
+
+else if($tipo=="valoraciones"){
+
+	$ver_valoraciones = mysqli_query($conexion,"SELECT * FROM valoraciones");
+    $valoraciones_obtenidas ="";
+
+	if($ver_valoraciones){
+		while($fila = mysqli_fetch_array($ver_valoraciones))
+		{
+			$valoraciones_obtenidas.= "<tr>
+					<td>$fila[id_usuario]</td>
+					<td>$fila[id_lugar]</td>
+					<td><a href='inicio.php?id=valoraciones'>$fila[valoracion]</a></td>
+				</tr>";
+        }
+        echo $valoraciones_obtenidas;
+	}
 }
 
 
-##### ACTUALIZAMOS LOS MONUMENTOS QUE SE MUESTRAN #####
-
-/*if($tipo == "mostrar_lugares"){
-
-	$lugares = mysqli_query($conexion,"SELECT * FROM lugares");
-	$lugares_tmp = "";
-
-	if($lugares){
-		while($fila = mysqli_fetch_array($lugares))
-		{
-			$lugares_tmp.= "<tr>
-				<td><input type='checkbox' name='lug_sel[]' class='lugares_sel' value='$fila[id_lugar]'/></td>
-				<td>$fila[nombre]</td>
-				<td>$fila[tipo]</td>
-				<td class='long'>$fila[longitud]</td>
-				<td clas='lat'>$fila[latitud]</td>
-				<td>$fila[visitas]</td>
-				<td><a href='inicio.php?id=monumentos&eliminar=$fila[id_lugar]'	class='ico del'>Eliminar</a>
-				<a href='inicio.php?id=ver_monumento&id_lugar=$fila[id_lugar]
-				&nombre_lugar=$fila[nombre]&lat=$fila[latitud]&lon=$fila[longitud]' class='ico edit'>Editar</a></td>
-			</tr>";
-		}
-		echo $lugares_tmp;
-	}
-}*/
 
 ?>

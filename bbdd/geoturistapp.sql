@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-12-2017 a las 18:15:35
+-- Tiempo de generación: 19-07-2018 a las 17:24:42
 -- Versión del servidor: 10.1.28-MariaDB
 -- Versión de PHP: 7.1.10
 
@@ -90,6 +90,18 @@ CREATE TABLE `imagenes` (
   `descripcion` varchar(300) CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `imagenes`
+--
+
+INSERT INTO `imagenes` (`id_lugar`, `url_imagen`, `descripcion`) VALUES
+(100, '1Q0IeFO.jpg', ''),
+(100, '1vPjZos.jpg', ''),
+(100, '1yETTgX.jpg', ''),
+(100, '2kca5Rj.jpg', ''),
+(120, '0aXZGjx.jpg', ''),
+(120, '1ioqWLq.jpg', '');
+
 -- --------------------------------------------------------
 
 --
@@ -114,10 +126,17 @@ CREATE TABLE `lugares` (
 --
 
 INSERT INTO `lugares` (`id_lugar`, `nombre`, `tipo`, `latitud`, `longitud`, `hora_abre`, `hora_cierra`, `dias_abre`, `descripcion`, `visitas`) VALUES
-(3, 'Cibeles', 'Monumento', '40.41349419', '-3.68133283', '00:00:00', '00:00:00', '', 'Es un monumento muy bonito', 0),
-(4, 'Sol', 'neighborhood', '40.4166635', '-3.7041686999999683', '00:00:00', '00:00:00', '', '', 0),
 (5, 'Museo Nacional del Prado', 'museum', '40.4137818', '-3.6921270999999933', '00:00:00', '00:00:00', '', '', 0),
-(6, 'Museo Reina SofÃ­a', 'museum', '40.4073281', '-3.694900200', '00:00:00', '00:00:00', '', '', 0);
+(6, 'Museo Reina SofÃ­a', 'museum', '40.4073281', '-3.694900200', '00:00:00', '00:00:00', '', '', 0),
+(8, 'Museo Sorolla', 'museum', '40.4354363', '-3.692517299999963', '20:20:00', '21:21:00', 'lunes', 'asqawraerf', 0),
+(76, 'Museo de Cera', 'museum', '40.4249581', '-3.691335200000026', '00:00:00', '00:00:00', '', '', 0),
+(97, 'Museo De La Radio', 'bar', '40.4097375', '-3.7085617000000184', '00:00:00', '00:00:00', '', '', 0),
+(100, 'Parque El Capricho', 'park', '40.456625', '-3.5989319999999907', '00:00:00', '00:00:00', '', '', 0),
+(119, 'Museo Sorolla', 'museum', '40.4354363', '-3.692517299999963', '00:00:00', '00:00:00', '', 'Museo muy bonito', 0),
+(120, 'Becerril de la Sierra', 'locality', '40.7102483', '-3.9954969000000347', '21:00:00', '22:00:00', 'L M X ', 'Pueblo de mierda', 0),
+(121, 'Torrelodones', 'locality', '40.5766078', '-3.9293645999999853', '00:00:00', '00:00:00', '', '', 0),
+(123, 'Puerta del Sol', 'monumento', '40.4169473', '-3.7035284999999476', '00:00:00', '23:59:00', '', 'Es muy bonita', 0),
+(131, 'Museo Nacional del Prado', 'museum', '40.4137818', '-3.6921270999999933', '00:00:00', '00:00:00', 'L M X J V S D ', '', 0);
 
 -- --------------------------------------------------------
 
@@ -131,9 +150,8 @@ CREATE TABLE `usuarios` (
   `apellidos` varchar(40) NOT NULL,
   `password` varchar(40) NOT NULL,
   `email` varchar(40) NOT NULL,
-  `fechaNacimiento` varchar(10) NOT NULL,
-  `sexo` varchar(20) NOT NULL,
   `comentarios` int(11) NOT NULL,
+  `visitas` int(11) NOT NULL,
   `img_perfil` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -141,8 +159,9 @@ CREATE TABLE `usuarios` (
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id_usuario`, `nombre`, `apellidos`, `password`, `email`, `fechaNacimiento`, `sexo`, `comentarios`, `img_perfil`) VALUES
-('david', 'David', 'Rodriguez', '827ccb0eea8a706c4c34a16891f84e7b', 'daviro05@ucm.es', '25', 'Masculino', 0, '');
+INSERT INTO `usuarios` (`id_usuario`, `nombre`, `apellidos`, `password`, `email`, `comentarios`, `visitas`, `img_perfil`) VALUES
+('david', 'David', 'Rodriguez', '827ccb0eea8a706c4c34a16891f84e7b', 'daviro05@ucm.es', 0, 0, 'vacio.png'),
+('turista', 'Pedro', 'Martinez', 'fcea920f7412b5da7be0cf42b8c93759', 'pedroturista@ucm.es', 0, 0, 'vacio.png');
 
 -- --------------------------------------------------------
 
@@ -162,10 +181,19 @@ CREATE TABLE `usuarios_lugares` (
 --
 
 CREATE TABLE `valoraciones` (
+  `id_valoracion` int(11) NOT NULL,
   `id_usuario` varchar(40) CHARACTER SET utf8 NOT NULL,
   `id_lugar` int(11) NOT NULL,
-  `valoracion` float NOT NULL
+  `valoracion` float NOT NULL,
+  `num_valoraciones` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `valoraciones`
+--
+
+INSERT INTO `valoraciones` (`id_valoracion`, `id_usuario`, `id_lugar`, `valoracion`, `num_valoraciones`) VALUES
+(7, 'david', 5, 2.65, 5);
 
 --
 -- Índices para tablas volcadas
@@ -223,18 +251,32 @@ ALTER TABLE `usuarios_lugares`
 -- Indices de la tabla `valoraciones`
 --
 ALTER TABLE `valoraciones`
+  ADD PRIMARY KEY (`id_valoracion`),
   ADD KEY `id_usuario` (`id_usuario`),
-  ADD KEY `id_lugar` (`id_lugar`);
+  ADD KEY `id_lugar` (`id_lugar`),
+  ADD KEY `id_valoracion` (`id_valoracion`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
+-- AUTO_INCREMENT de la tabla `comentarios`
+--
+ALTER TABLE `comentarios`
+  MODIFY `id_comentario` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `lugares`
 --
 ALTER TABLE `lugares`
-  MODIFY `id_lugar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_lugar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=132;
+
+--
+-- AUTO_INCREMENT de la tabla `valoraciones`
+--
+ALTER TABLE `valoraciones`
+  MODIFY `id_valoracion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Restricciones para tablas volcadas

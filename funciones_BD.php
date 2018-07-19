@@ -342,21 +342,6 @@ function eliminar_lugar($id_lugar,$conexion){
 
 
 
-function info_comentarios($conexion){
-	$ver_comen = mysqli_query($conexion,"SELECT * FROM comentarios");
-
-	if($ver_comen){
-		while($fila = mysqli_fetch_array($ver_comen))
-		{
-			echo "<tr>
-					<td><a>$fila[id_lugar]</a></td>
-					<td><a>$fila[comentario]</a></td>
-				</tr>";
-		}
-	}
-}
-
-
 function contar_filas($tipo,$conexion){
 	if($tipo == "lugares")
 		$sql = "SELECT * FROM lugares";
@@ -591,16 +576,18 @@ function alta_valoracion($id_usuario,$id_lugar,$valoracion,$conexion)
 
 	if(mysqli_num_rows($valoraciones)==1)
 	{
-		echo 'Ya se ha valorado ese lugar';
+		//echo 'Ya se ha valorado ese lugar';
 		$modificar_val = mysqli_query($conexion,"UPDATE valoraciones SET num_valoraciones = num_valoraciones+1 , 
-		valoracion = (valoracion+'$valoracion')/(num_valoraciones)
+		sum_valoraciones = sum_valoraciones + '$valoracion',
+		valoracion = (sum_valoraciones)/(num_valoraciones)
 		 WHERE id_lugar = '$id_lugar'");
+
 		echo "<script>window.location = './inicio.php?id=valoraciones'</script>";
 	}
 	else{
 		
-		$alta_valoracion = mysqli_query($conexion,"INSERT INTO valoraciones (id_usuario,id_lugar,valoracion, num_valoraciones)
-			VALUES('$id_usuario','$id_lugar','$valoracion',1)") or die(mysqli_error($conexion));
+		$alta_valoracion = mysqli_query($conexion,"INSERT INTO valoraciones (id_usuario,id_lugar,valoracion, num_valoraciones, sum_valoraciones)
+			VALUES('$id_usuario','$id_lugar','$valoracion',1, '$valoracion')") or die(mysqli_error($conexion));
 
 		if($alta_valoracion)
 			echo "<script>window.location = './inicio.php?id=valoraciones'</script>";
@@ -627,7 +614,7 @@ function obtener_valoraciones($conexion){
 	}
 }
 
-function eliminar_valoracion($id_comentario,$conexion){
+function eliminar_valoracion($id_valoracion,$conexion){
 	$eliminar = mysqli_query($conexion,"DELETE FROM valoraciones WHERE id_valoracion='$id_valoracion'");
 	echo "<script>window.location = './inicio.php?id=valoraciones'</script>";
 }

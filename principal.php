@@ -28,16 +28,16 @@
 							<div class="cabecera">Comentarios</div>
 							<div class="cuadro_info">
 								<table class="ver_info">
-									
+								<div id="up_comentarios"></div>	
 								</table>
 							</div>
 						</div>
 
 						<div id="ini-estadisticas">
-							<div class="cabecera">Estadísticas</div>
+							<div class="cabecera">Valoraciones</div>
 							<div class="cuadro_info">
 								<table class="ver_info">
-									
+								<div id="up_valoraciones"></div>	
 								</table>
 							</div>
 						</div>
