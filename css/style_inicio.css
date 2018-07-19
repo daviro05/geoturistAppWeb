@@ -486,6 +486,15 @@ td .lat, td .long{
 
 }
 
+/* Estilo pagina incidencias.php */
+
+#u_incidencia, #t_incidencia{
+	height: 35px;
+	margin-top: 10px;
+
+}
+
+
 
 
 /* Estilo pagina comentarios.php */

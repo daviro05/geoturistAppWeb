@@ -620,8 +620,42 @@ function eliminar_valoracion($id_valoracion,$conexion){
 }
 
 #######################################
-####### FUNCIONES DE MENSAJES #########
+######  FUNCIONES DE INCIDENCIAS ######
 #######################################
+
+function alta_incidencia($id_usuario,$tipo,$incidencia,$conexion)
+{
+		
+		$alta_incidencia = mysqli_query($conexion,"INSERT INTO incidencias (id_usuario,tipo,incidencia)
+			VALUES('$id_usuario','$tipo','$incidencia')") or die(mysqli_error($conexion));
+
+		if($alta_incidencia)
+			echo "<script>window.location = './inicio.php?id=incidencias'</script>";
+
+}
+
+
+function obtener_incidencias($conexion){
+	$incidencias = mysqli_query($conexion,"SELECT * FROM incidencias");
+
+	if($incidencias){
+		while($fila = mysqli_fetch_array($incidencias))
+		{
+			echo "<tr>
+				<td><input type='checkbox' name='incidencia_sel[]' class='lugares_sel' value='$fila[id_incidencia]'/></td>
+				<td>$fila[id_usuario]</td>
+				<td>$fila[tipo]</td>
+				<td>$fila[incidencia]</td>
+				<td><a href='inicio.php?id=incidencias&eliminar=$fila[id_incidencia]' class='ico del' onclick='return confirmar()'>Eliminar</a>
+			</tr>";
+		}
+	}
+}
+
+function eliminar_incidencia($id_incidencia,$conexion){
+	$eliminar = mysqli_query($conexion,"DELETE FROM incidencias WHERE id_incidencia='$id_incidencia'");
+	echo "<script>window.location = './inicio.php?id=incidencias'</script>";
+}
 
 
 #######################################

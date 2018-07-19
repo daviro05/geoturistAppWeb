@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-07-2018 a las 17:24:42
+-- Tiempo de generación: 19-07-2018 a las 18:18:40
 -- Versión del servidor: 10.1.28-MariaDB
 -- Versión de PHP: 7.1.10
 
@@ -46,6 +46,13 @@ CREATE TABLE `comentarios` (
   `id_lugar` int(11) NOT NULL,
   `comentario` varchar(400) CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `comentarios`
+--
+
+INSERT INTO `comentarios` (`id_comentario`, `id_usuario`, `id_lugar`, `comentario`) VALUES
+(2, 'david', 5, 'Me encanta!');
 
 -- --------------------------------------------------------
 
@@ -101,6 +108,19 @@ INSERT INTO `imagenes` (`id_lugar`, `url_imagen`, `descripcion`) VALUES
 (100, '2kca5Rj.jpg', ''),
 (120, '0aXZGjx.jpg', ''),
 (120, '1ioqWLq.jpg', '');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `incidencias`
+--
+
+CREATE TABLE `incidencias` (
+  `id_incidencia` int(11) NOT NULL,
+  `id_usuario` varchar(40) CHARACTER SET utf8 NOT NULL,
+  `tipo` varchar(40) CHARACTER SET utf8 NOT NULL,
+  `incidencia` varchar(200) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -185,15 +205,16 @@ CREATE TABLE `valoraciones` (
   `id_usuario` varchar(40) CHARACTER SET utf8 NOT NULL,
   `id_lugar` int(11) NOT NULL,
   `valoracion` float NOT NULL,
-  `num_valoraciones` int(11) NOT NULL
+  `num_valoraciones` int(11) NOT NULL,
+  `sum_valoraciones` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `valoraciones`
 --
 
-INSERT INTO `valoraciones` (`id_valoracion`, `id_usuario`, `id_lugar`, `valoracion`, `num_valoraciones`) VALUES
-(7, 'david', 5, 2.65, 5);
+INSERT INTO `valoraciones` (`id_valoracion`, `id_usuario`, `id_lugar`, `valoracion`, `num_valoraciones`, `sum_valoraciones`) VALUES
+(18, 'david', 5, 6.5, 4, 26);
 
 --
 -- Índices para tablas volcadas
@@ -225,6 +246,14 @@ ALTER TABLE `documentos`
 --
 ALTER TABLE `imagenes`
   ADD KEY `id_lugar` (`id_lugar`);
+
+--
+-- Indices de la tabla `incidencias`
+--
+ALTER TABLE `incidencias`
+  ADD PRIMARY KEY (`id_incidencia`),
+  ADD KEY `id_incidencia` (`id_incidencia`),
+  ADD KEY `id_usuario` (`id_usuario`);
 
 --
 -- Indices de la tabla `lugares`
@@ -264,19 +293,25 @@ ALTER TABLE `valoraciones`
 -- AUTO_INCREMENT de la tabla `comentarios`
 --
 ALTER TABLE `comentarios`
-  MODIFY `id_comentario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_comentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `incidencias`
+--
+ALTER TABLE `incidencias`
+  MODIFY `id_incidencia` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `lugares`
 --
 ALTER TABLE `lugares`
-  MODIFY `id_lugar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=132;
+  MODIFY `id_lugar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=133;
 
 --
 -- AUTO_INCREMENT de la tabla `valoraciones`
 --
 ALTER TABLE `valoraciones`
-  MODIFY `id_valoracion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_valoracion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- Restricciones para tablas volcadas
@@ -306,6 +341,12 @@ ALTER TABLE `documentos`
 --
 ALTER TABLE `imagenes`
   ADD CONSTRAINT `imagenes_ibfk_1` FOREIGN KEY (`id_lugar`) REFERENCES `lugares` (`id_lugar`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `incidencias`
+--
+ALTER TABLE `incidencias`
+  ADD CONSTRAINT `incidencias_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `usuarios_lugares`
