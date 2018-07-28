@@ -97,10 +97,10 @@
 			$apellidos=$_POST['apellidos'];
 			$email=$_POST['email'];
 			$comentarios=0;
-			$visitas=0;
+			$valoraciones=0;
 
 		  	alta_usuario($usuario,$nombre,$apellidos,$clave,
-		  		$email,$comentarios,$visitas,$conexion);
+		  		$email,$comentarios,$valoraciones,$conexion);
 		  }
 		  
 		}

@@ -426,16 +426,14 @@ function eliminar_seleccionados($conexion){
 #######################################
 
 
-function alta_usuario($id_usuario,$nombre,$apellidos,$password,$email,$comentarios,$visitas,$conexion)
+function alta_usuario($id_usuario,$nombre,$apellidos,$password,$email,$comentarios,$valoraciones,$conexion)
 {
-	$alta_usuario = mysqli_query($conexion,"INSERT INTO usuarios (id_usuario,nombre,apellidos,password,email,comentarios,visitas,img_perfil)
-		VALUES('$id_usuario','$nombre','$apellidos','$password','$email','$comentarios','$visitas','vacio.png')");
+	$alta_usuario = mysqli_query($conexion,"INSERT INTO usuarios (id_usuario,nombre,apellidos,password,email,comentarios,valoraciones,img_perfil)
+		VALUES('$id_usuario','$nombre','$apellidos','$password','$email','$comentarios','$valoraciones','vacio.png')");
 
-	/*if($alta_usuario){
-		if($_FILES['imaperfil']['size'] != 0){
-			subir_imagenes_perfil($id_usuario,$conexion);
-		}
-	}*/
+	if($alta_usuario){
+		echo "<script>window.location = './inicio.php?id=usuarios'</script>";
+	}
 }
 
 function subir_imagenes_perfil($id_usuario,$conexion){
@@ -492,7 +490,7 @@ function obtener_usuarios($conexion){
 				<td>$fila[apellidos]</td>
 				<td>$fila[email]</td>
 				<td>$fila[comentarios]</td>
-				<td>$fila[visitas]</td>
+				<td>$fila[valoraciones]</td>
 				<td><a href='inicio.php?id=usuarios&eliminar=$fila[id_usuario]' class='ico del' onclick='return confirmar()'>Eliminar</a>
 			</tr>";
 		}
@@ -502,6 +500,37 @@ function obtener_usuarios($conexion){
 function eliminar_usuario($id_usuario,$conexion){
 	$eliminar = mysqli_query($conexion,"DELETE FROM usuarios WHERE id_usuario='$id_usuario'");
 	echo "<script>window.location = './inicio.php?id=usuarios'</script>";
+}
+
+function add_lugar_usuario($id_usuario, $id_lugar, $nombre_lugar,$conexion){
+	// Método que conecta un lugar a un usuario en la tabla usuarios_lugares. 
+	// Debemos también aumentar el nº de visitas de ese lugar.
+
+	$usuarios_lugares = mysqli_query($conexion,"SELECT * FROM usuarios_lugares WHERE id_lugar='$id_lugar'");
+
+	// Si no existe ese lugar en la lista del usuario lo agregamos.
+
+	if(mysqli_num_rows($usuarios_lugares)==0)
+	{
+		$add_visita = mysqli_query($conexion,"INSERT INTO usuarios_lugares (id_usuario, id_lugar, nombre_lugar) 
+		VALUES ('$id_usuario','$id_lugar', '$nombre_lugar')") or die(mysqli_error($conexion));
+
+		$inc_visita =  mysqli_query($conexion,"UPDATE lugares SET visitas = visitas+1") 
+		or die(mysqli_error($conexion));
+	}
+}
+
+function mostrar_lugares_usuario($id_usuario){
+
+	$mostrar_lugares = mysqli_query($conexion,"SELECT * FROM usuarios_lugares WHERE id_usuario='$id_usuario'");
+
+	if($mostrar_lugares){
+		while($fila = mysqli_fetch_array($mostrar_lugares))
+		{
+			echo "<option value='$fila[id_lugar]'>$fila[nombre_lugar]</option>";
+		}
+	}
+
 }
 
 #######################################

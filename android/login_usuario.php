@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-include "funciones_BD.php";
+include "../funciones_BD.php";
 $conexion = conecta();
 
 if($_POST['id_usuario']!="")
