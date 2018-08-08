@@ -27,7 +27,9 @@ if($_POST['id_usuario']!="")
                     $response["id_usuario"] = $fila['id_usuario'];
                     $response["nombre"] = $fila['nombre'];
                     $response["apellidos"] = $fila['apellidos'];
-                    $response["email"] = $fila['email'];
+					$response["email"] = $fila['email'];
+					$response["comentarios"] = $fila['comentarios'];
+					$response["valoraciones"] = $fila['valoraciones'];
                 }
                 
                 echo json_encode($response);
