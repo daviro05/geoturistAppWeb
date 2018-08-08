@@ -542,6 +542,9 @@ function alta_comentario($id_usuario,$id_lugar,$comentario,$conexion)
 	$alta_comentario = mysqli_query($conexion,"INSERT INTO comentarios (id_usuario,id_lugar,comentario)
 		VALUES('$id_usuario','$id_lugar','$comentario')") or die(mysqli_error($conexion));
 
+	$alta_comentario_u =  mysqli_query($conexion,"UPDATE usuarios SET comentarios = comentarios+1 WHERE id_usuario='$id_usuario'" ) 
+	or die(mysqli_error($conexion));
+
 	if($alta_comentario)
 		echo "<script>window.location = './inicio.php?id=comentarios'</script>";
 
@@ -623,6 +626,9 @@ function alta_valoracion($id_usuario,$id_lugar,$valoracion,$conexion)
 		if($alta_valoracion)
 			echo "<script>window.location = './inicio.php?id=valoraciones'</script>";
 	}
+
+	$alta_valoracion_u =  mysqli_query($conexion,"UPDATE usuarios SET valoraciones = valoraciones+1  WHERE id_usuario='$id_usuario'" ) 
+	or die(mysqli_error($conexion));
 
 }
 
