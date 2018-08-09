@@ -396,6 +396,20 @@ function obtener_archivos($id_lugar,$tipo,$conexion){
 
 }
 
+
+function actualizar_multimedia($id_lugar,$conexion){
+
+	if($_FILES['file_img']['size'][0] != 0){
+		subir_imagenes($id_lugar,$conexion);
+	}
+	if($_FILES['file_audio']['size'][0] != 0){
+		subir_audios($id_lugar,$conexion);
+	}
+	if($_FILES['file_doc']['size'][0] != 0){
+		subir_docs($id_lugar,$conexion);
+	}
+}
+
 function eliminar_archivos($id_lugar,$tipo,$url,$conexion){
 	if($tipo == "img_lugares"){
 		$sql = "DELETE FROM imagenes WHERE id_lugar='$id_lugar' AND url_imagen='$url'";
