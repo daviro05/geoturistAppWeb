@@ -384,7 +384,7 @@ function obtener_archivos($id_lugar,$tipo,$conexion){
 		while($fila = mysqli_fetch_array($resultado))
 		{
 			echo "<tr>
-					<td><a href='inicio.php?id=ver_monumento&inicio.php?id=ver_monumento&id_lugar=$fila[id_lugar]
+					<td><a href='inicio.php?id=ver_monumento&id_lugar=$fila[id_lugar]
 					&nombre_lugar=$_GET[nombre_lugar]&lat=$_GET[lat]&lon=$_GET[lon]
 					&tipo_archivo=$tipo&url=$fila[$url]&eliminar=true'>Eliminar</a></td>
 					<td> - </td>
@@ -394,6 +394,12 @@ function obtener_archivos($id_lugar,$tipo,$conexion){
 	}
 
 
+}
+
+function url_actualizar(){
+	echo "<a href='inicio.php?id=ver_monumento&id_lugar=$_GET[id_lugar]
+	&nombre_lugar=$_GET[nombre_lugar]&lat=$_GET[lat]&lon=$_GET[lon]&
+	actualizar=true'>Actualizar</a>";
 }
 
 

@@ -83,7 +83,8 @@
 										</div>
 										<textarea disabled id="desc" name="desc" placeholder="Descripción" ><?php echo $descripcion; ?></textarea>
 								</div>
-									<input class="add-lugar-button" type="submit" name="ActualizarMulti" value="Subir Multimedia"/>
+									<!--<input class="add-lugar-button" type="submit" name="ActualizarMulti" value="Subir Multimedia"/>-->
+									<?php url_actualizar() ?>
 							
 						</div>
 						<div class="ver_zona_der">
@@ -118,11 +119,12 @@
 		<?php
 			if(isset($_GET['eliminar'])){
 				eliminar_archivos($_GET['id_lugar'],$_GET['tipo_archivo'],$_GET['url'],$conexion);
-				header("Location:inicio.php");
+				//header("Location:inicio.php");
 			}
 
-			if(isset($_POST['ActualizarMulti'])){
-				actualizar_multimedia($_GET['id_lugar'],$conexion);
+			if(isset($_GET['actualizar'])){
+				echo $_FILES['file_img']['name'][0];
+				//actualizar_multimedia($_GET['id_lugar'],$conexion);
 				//header("Location:inicio.php");
 			}
 		?>
