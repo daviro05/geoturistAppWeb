@@ -399,6 +399,10 @@ function obtener_archivos($id_lugar,$tipo,$conexion){
 
 function actualizar_multimedia($id_lugar,$conexion){
 
+	// HAY QUE HACER QUE SE PUEDAN SUBIR MÁS IMAGENES
+
+	echo $id_lugar." - ".$_FILES['file_img']['size'][0];
+
 	if($_FILES['file_img']['size'][0] != 0){
 		subir_imagenes($id_lugar,$conexion);
 	}
@@ -408,6 +412,8 @@ function actualizar_multimedia($id_lugar,$conexion){
 	if($_FILES['file_doc']['size'][0] != 0){
 		subir_docs($id_lugar,$conexion);
 	}
+
+
 }
 
 function eliminar_archivos($id_lugar,$tipo,$url,$conexion){

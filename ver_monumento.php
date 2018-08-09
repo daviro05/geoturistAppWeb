@@ -12,7 +12,7 @@
 							<input type="submit" class="button" value="Buscar" />-->
 						</div>
 					</div>
-					<form id="add-lugar" action="inicio.php?id=monumentos" method="post" enctype="multipart/form-data" >
+					<form id="add-lugar" action="" method="post" enctype="multipart/form-data" >
 					<!-- End Box Head -->
 					<!-- Table -->
 					<div class="ver_zona_izq">
@@ -122,7 +122,7 @@
 			}
 
 			if(isset($_POST['ActualizarMulti'])){
-				//actualizar_multimedia($_GET['id_lugar'],$conexion);
-				header("Location:inicio.php?id=monumentos");
+				actualizar_multimedia($_GET['id_lugar'],$conexion);
+				//header("Location:inicio.php");
 			}
 		?>
