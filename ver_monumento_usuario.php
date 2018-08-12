@@ -9,6 +9,8 @@ if($_GET['id_lugar']!="")
 		$id_lugar = $_GET['id_lugar'];
 		$id_usuario = $_GET['id_usuario'];
 		$agregado = false;
+		$val_total = 0;
+		$num_val = 0;
 
 		$sentencia=mysqli_query($conexion,"SELECT * FROM lugares WHERE id_lugar='$id_lugar'");
 
@@ -33,7 +35,18 @@ if($_GET['id_lugar']!="")
 		if(mysqli_num_rows($comprobar_lugar)==1)
 		{
 			$agregado = true;
-		}	
+		}
+		
+		$obtener_valoraciones=mysqli_query($conexion,"SELECT * FROM valoraciones 
+		WHERE id_lugar='$id_lugar'");
+
+		if($obtener_valoraciones){
+			$val_monumento = mysqli_fetch_array($obtener_valoraciones);
+
+			$val_total = $val_monumento['valoracion'];
+			$num_val = $val_monumento['num_valoraciones'];
+
+		}
 
 		$fila = mysqli_fetch_array($sentencia);
 		$temp = [
@@ -44,6 +57,8 @@ if($_GET['id_lugar']!="")
 				'descripcion' =>  $fila['descripcion'],
 				'visitas' =>  $fila['visitas'],
 				'agregado' => $agregado,
+				'val_total' => $val_total,
+				'num_val' => $num_val,
 				];
 		array_push($response, $temp);
 		}

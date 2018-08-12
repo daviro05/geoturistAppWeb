@@ -1,20 +1,19 @@
 <?php
 
-if(1)
-{
-		//$usuario=$_POST['id_usuario'];
-		$lon1 = -3.6921270999999933;
-		$lat1 = 40.4137818;
 
-		$lon2 = -3.694900200;
-		$lat2 = 40.4073281;
+	//$usuario=$_POST['id_usuario'];
+	$lon1 = -3.6921270999999933;
+	$lat1 = 40.4137818;
 
-		$punto1 = [$lon1, $lat1];
-		$punto2 = [$lon2, $lat2];
+	$lon2 = -3.694900200;
+	$lat2 = 40.4073281;
 
-		//para kilómetros
-		echo distance($punto1[0], $punto1[1], $punto2[0], $punto2[1], "K") . " Kilómetros";	
-}
+	$punto1 = [$lon1, $lat1];
+	$punto2 = [$lon2, $lat2];
+
+	//para kilómetros
+	echo distance($punto1[0], $punto1[1], $punto2[0], $punto2[1], "K") . " Kilómetros";	
+
 
 
 function distance($lat1, $lon1, $lat2, $lon2, $unit) {

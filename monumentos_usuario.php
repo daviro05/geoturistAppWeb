@@ -28,16 +28,6 @@ if($_GET['id_usuario']!="")
 				array_push($response, $temp);
 			}
 		}
-
-		//array_push($response, ['num_lugares' => $num_lugares]);
-			
-			//$response["correcto"] = true;
-
-			
-
-/* 			$response["id_usuario"] = $fila['id_usuario'];
-			$response["id_lugar"] = $fila['id_lugar'];
-			$response["nombre_lugar"] = $fila['nombre_lugar']; */
 		
 		echo json_encode($response);
 }
