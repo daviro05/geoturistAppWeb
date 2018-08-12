@@ -40,7 +40,7 @@ if($_GET['id_lugar']!="")
 		$obtener_valoraciones=mysqli_query($conexion,"SELECT * FROM valoraciones 
 		WHERE id_lugar='$id_lugar'");
 
-		if($obtener_valoraciones){
+		if(mysqli_num_rows($obtener_valoraciones) == 1){
 			$val_monumento = mysqli_fetch_array($obtener_valoraciones);
 
 			$val_total = $val_monumento['valoracion'];
