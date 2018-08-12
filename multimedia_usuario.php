@@ -11,9 +11,9 @@ if($_GET['id_lugar']!="")
 
 		$imagenes=mysqli_query($conexion,"SELECT * FROM imagenes WHERE id_lugar='$id_lugar'");
 
-		$audios=mysqli_query($conexion,"SELECT * FROM imagenes WHERE id_lugar='$id_lugar'");
+		$audios=mysqli_query($conexion,"SELECT * FROM audios WHERE id_lugar='$id_lugar'");
 
-		$documentos=mysqli_query($conexion,"SELECT * FROM imagenes WHERE id_lugar='$id_lugar'");
+		$documentos=mysqli_query($conexion,"SELECT * FROM documentos WHERE id_lugar='$id_lugar'");
 
 		$response = array();
 
