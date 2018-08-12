@@ -184,7 +184,7 @@ $tamano = $_FILES['file_img']['size'];
 $cantidad= count($_FILES['file_img']['tmp_name']);
 $img_tmp=$_FILES['file_img']['tmp_name'];
 
-echo $nombre_img[0];
+//echo $nombre_img[0];
 
 for ($i=0; $i<$cantidad; $i++){
  
@@ -212,7 +212,7 @@ for ($i=0; $i<$cantidad; $i++){
 	} 
 	else 
 	{
-	   //si existe la variable pero se pasa del tama�o permitido
+	   //si existe la variable pero se pasa del tamanio permitido
 	   if($nombre_img == !NULL) echo "La imagen es demasiado grande "; 
 	}
 }
@@ -396,18 +396,12 @@ function obtener_archivos($id_lugar,$tipo,$conexion){
 
 }
 
-function url_actualizar(){
-	echo "<a href='inicio.php?id=ver_monumento&id_lugar=$_GET[id_lugar]
-	&nombre_lugar=$_GET[nombre_lugar]&lat=$_GET[lat]&lon=$_GET[lon]&
-	actualizar=true'>Actualizar</a>";
-}
-
 
 function actualizar_multimedia($id_lugar,$conexion){
 
 	// HAY QUE HACER QUE SE PUEDAN SUBIR MÁS IMAGENES
 
-	echo $id_lugar." - ".$_FILES['file_img']['size'][0];
+	//echo $id_lugar." - ".$_FILES['file_img']['size'][0];
 
 	if($_FILES['file_img']['size'][0] != 0){
 		subir_imagenes($id_lugar,$conexion);
@@ -419,7 +413,12 @@ function actualizar_multimedia($id_lugar,$conexion){
 		subir_docs($id_lugar,$conexion);
 	}
 
+}
 
+function actualizar_pagina(){
+
+	echo '<script>window.location = ""</script>';
+	
 }
 
 function eliminar_archivos($id_lugar,$tipo,$url,$conexion){

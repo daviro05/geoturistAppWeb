@@ -1,15 +1,3 @@
-/*function confirmar()
-{
-	if(confirm("Seguro?"))
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-}*/
-
 function redirigir()
 {
 	setTimeout ("redirection()", 300);
