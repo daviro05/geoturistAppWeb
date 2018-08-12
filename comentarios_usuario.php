@@ -4,28 +4,31 @@ session_start();
 include "funciones_BD.php";
 $conexion = conecta();
 
-if($_GET['id_lugar']!="")
+if($_GET['id_usuario']!="")
 {
-		$id_lugar=$_GET['id_lugar'];
-		
-		$tipo_dato=$_GET['tipo_dato'];
+		$id_usuario=$_GET['id_usuario'];
 
-		$comentarios=mysqli_query($conexion,"SELECT * FROM comentarios WHERE id_lugar='$id_lugar'");
+		// Hay que obtener el nombre del lugar
+		
+
+		$comentarios=mysqli_query($conexion,"SELECT * FROM comentarios WHERE id_usuario='$id_usuario'");
 
 		$response = array();
 
-		if($tipo_dato == "comentarios"){
+		if($comentarios){
+			while($fila = mysqli_fetch_array($comentarios))
+			{
 
-			if($comentarios){
-				while($fila = mysqli_fetch_array($comentarios))
-				{
-					$temp = [
-						'comentarios' => $fila['comentario'],
-					];
-					array_push($response, $temp);
-				}
+				$lugar=mysqli_query($conexion,"SELECT nombre FROM lugares WHERE id_lugar='$fila[id_lugar]'");
+
+				$fila_lugar = mysqli_fetch_array($lugar);
+
+				$temp = [
+					'comentario' => $fila['comentario'],
+					'nombre_lugar' => $fila_lugar['nombre']
+				];
+				array_push($response, $temp);
 			}
-
 		}
 	
 		echo json_encode($response);

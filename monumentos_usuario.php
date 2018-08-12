@@ -7,7 +7,6 @@ $conexion = conecta();
 if($_GET['id_usuario']!="")
 {
 		$usuario=$_GET['id_usuario'];
-		$num_lugares = 0;
 		
 		$usuario=mysqli_real_escape_string($conexion,$usuario);
 
@@ -19,7 +18,6 @@ if($_GET['id_usuario']!="")
 		if($sentencia){
 			while($fila = mysqli_fetch_array($sentencia))
 			{
-				$num_lugares++;
 				$temp = [
 					'id_usuario' => $fila['id_usuario'],
 					'id_lugar' => $fila['id_lugar'],
