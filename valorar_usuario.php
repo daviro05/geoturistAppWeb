@@ -14,7 +14,8 @@ if($_GET['id_lugar']!="")
     if($valoracion != '')
         alta_valoracion($id_usuario,$id_lugar,$valoracion,$conexion);
 
-    alta_comentario($id_usuario,$id_lugar,$comentario,$conexion);
+    if($comentario != '')
+        alta_comentario($id_usuario,$id_lugar,$comentario,$conexion);
 
 }
 
