@@ -531,7 +531,7 @@ function add_lugar_usuario($id_usuario, $id_lugar, $nombre_lugar,$conexion){
 	// Método que conecta un lugar a un usuario en la tabla usuarios_lugares. 
 	// Debemos también aumentar el nº de visitas de ese lugar.
 
-	$usuarios_lugares = mysqli_query($conexion,"SELECT * FROM usuarios_lugares WHERE id_lugar='$id_lugar'");
+	$usuarios_lugares = mysqli_query($conexion,"SELECT * FROM usuarios_lugares WHERE id_lugar='$id_lugar' AND id_usuario='$id_usuario'");
 
 	// Si no existe ese lugar en la lista del usuario lo agregamos.
 
